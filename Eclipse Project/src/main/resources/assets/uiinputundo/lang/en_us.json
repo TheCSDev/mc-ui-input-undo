@@ -1,0 +1,5 @@
+{
+	"thecsdev.uiinputundo": "UI Input Undo",
+	"thecsdev.uiinputundo.undo_key": "Undo text (CTRL + _)",
+	"thecsdev.uiinputundo.redo_key": "Redo text (CTRL + _)"
+}
