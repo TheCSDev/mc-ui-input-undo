@@ -64,7 +64,9 @@ public abstract class TextFieldWidgetMixin
 		//check for undo
 		if(UIInputUndoClient.KeyUndo.matchesKey(keyCode, scanCode))
 		{
-			undo();
+			if(!Screen.hasShiftDown()) undo();
+			else undo(true);
+			
 			callback.setReturnValue(true);
 			callback.cancel();
 			return;
@@ -73,7 +75,9 @@ public abstract class TextFieldWidgetMixin
 		//check for redo
 		else if(UIInputUndoClient.KeyRedo.matchesKey(keyCode, scanCode))
 		{
-			redo();
+			if(!Screen.hasShiftDown()) redo();
+			else redo(true);
+			
 			callback.setReturnValue(true);
 			callback.cancel();
 			return;
@@ -109,7 +113,9 @@ public abstract class TextFieldWidgetMixin
 	}
 	// --------------------------------------------------
 	@DontObfuscate
-	public void undo()
+	public void undo() { undo(false); }
+	@DontObfuscate
+	public void undo(boolean undoSingle)
 	{
 		//check undo history size
 		if(UndoHistory.size() < 1)
@@ -133,13 +139,15 @@ public abstract class TextFieldWidgetMixin
 			setText(text);
 			if(!oldText.startsWith(text)) break;
 		}
-		while(UndoHistory.size() > 0 && keepUndoing(text.charAt(text.length() - 1)));
+		while(!undoSingle && (UndoHistory.size() > 0 && keepUndoing(text.charAt(text.length() - 1))));
 		
 		Undoing = false;
 	}
 	
 	@DontObfuscate
-	public void redo()
+	public void redo() { redo(false); }
+	@DontObfuscate
+	public void redo(boolean redoSingle)
 	{
 		//check redo history size
 		if(RedoHistory.size() < 1)
@@ -163,7 +171,7 @@ public abstract class TextFieldWidgetMixin
 			setText(text);
 			if(!text.startsWith(oldText)) break;
 		}
-		while(RedoHistory.size() > 0 && keepUndoing(text.charAt(text.length() - 1)));
+		while(!redoSingle && (RedoHistory.size() > 0 && keepUndoing(text.charAt(text.length() - 1))));
 		
 		Undoing = false;
 	}
