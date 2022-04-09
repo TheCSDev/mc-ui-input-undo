@@ -3,10 +3,10 @@ This is a client-side mod that adds a feature that allows you to undo and redo c
 
 Sometimes you might make a mistake while typing in the chat or in options or you may accidentally erase the text you wrote. This mod will allow you to undo such mistakes.
 
-You can download this mod and find more info about this mod over on [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ui-input-undo-fabric)<!-- and on [Modrinth](https://modrinth.com/mod/ui-input-undo-fabric)-->.
+You can download this mod and find more info about this mod over on [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ui-input-undo-fabric) and on [Modrinth](https://modrinth.com/mod/ui-input-undo-fabric).
 
 ##
 <p align=center>
   <a href="https://www.curseforge.com/minecraft/mc-mods/ui-input-undo-fabric"><img alt="CurseForge" src="https://cf.way2muchnoise.eu/606985.svg"/></a>
-  <!--<a href="https://modrinth.com/mod/ui-input-undo-fabric"><img alt="Modrinth" src="https://img.shields.io/modrinth/dt/project_id?label=Modrinth"></a>-->
+  <a href="https://modrinth.com/mod/ui-input-undo-fabric"><img alt="Modrinth" src="https://img.shields.io/modrinth/dt/lyl0ZcTc?label=Modrinth"></a>
 </p>
