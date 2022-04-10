@@ -14,4 +14,17 @@ public class HistoryEntry
 		this.text = text;
 		this.cursorPosition = cursorPosition;
 	}
+	
+	@Override
+	public HistoryEntry clone()
+	{
+		return new HistoryEntry(text, cursorPosition);
+	}
+	
+	public static HistoryEntry empty()
+	{
+		//must behave like a C# struct. this means that
+		//each call has to return a new copy
+		return new HistoryEntry("", 0);
+	}
 }
