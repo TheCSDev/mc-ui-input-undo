@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Create a bug report
-title: "[Mod version] Bug report title"
+title: "[Forge/Fabric] [Mod version] Bug report title"
 labels: Bug
 assignees: ''
 
