@@ -6,7 +6,19 @@ Sometimes you might make a mistake while typing in the chat or in options or you
 You can download this mod and find more info about this mod over on [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ui-input-undo-fabric) and on [Modrinth](https://modrinth.com/mod/ui-input-undo-fabric).
 
 ##
-<p align=center>
-  <a href="https://www.curseforge.com/minecraft/mc-mods/ui-input-undo-fabric"><img alt="CurseForge" src="https://cf.way2muchnoise.eu/606985.svg"/></a>
-  <a href="https://modrinth.com/mod/ui-input-undo-fabric"><img alt="Modrinth" src="https://img.shields.io/modrinth/dt/lyl0ZcTc?label=Modrinth"></a>
-</p>
+<table align=center>
+  <tr>
+    <td align=center>Fabric</td>
+    <td align=center>Forge</td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://www.curseforge.com/minecraft/mc-mods/ui-input-undo-fabric"><img alt="CurseForge" src="https://cf.way2muchnoise.eu/606985.svg"/></a>
+      <a href="https://modrinth.com/mod/ui-input-undo-fabric"><img alt="Modrinth" src="https://img.shields.io/modrinth/dt/lyl0ZcTc?label=Modrinth"></a>
+    </td>
+    <td>
+      <a href="https://www.curseforge.com/minecraft/mc-mods/ui-input-undo-forge"><img alt="CurseForge" src="https://cf.way2muchnoise.eu/615362.svg"/></a>
+      <a href="https://modrinth.com/mod/ui-input-undo-forge"><img alt="Modrinth" src="https://img.shields.io/modrinth/dt/SXtcjLjf?label=Modrinth"></a>
+    </td>
+  </tr>
+</table>
