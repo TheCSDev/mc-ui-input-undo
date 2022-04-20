@@ -1,9 +1,12 @@
 package thecsdev.uiinputundo.mixin;
 
 import java.util.ArrayList;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 import org.apache.commons.lang3.StringUtils;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -14,6 +17,7 @@ import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.obfuscate.DontObfuscate;
 import thecsdev.uiinputundo.client.HistoryEntry;
+import thecsdev.uiinputundo.client.TextManipUtils;
 import thecsdev.uiinputundo.client.UIInputUndoClient;
 
 @Mixin(EditBox.class)
@@ -50,6 +54,11 @@ public abstract class EditBoxMixin
 	@Invoker("setValue") public abstract void setValue(String value);
 	@Invoker("getCursorPosition") public abstract int getCursorPosition();
 	@Invoker("setCursorPosition") public abstract void setCursorPosition(int cursor);
+	@Invoker("setHighlightPos") public abstract void setHighlightPos(int highlight);
+	
+	@Accessor("highlightPos") public abstract int getHighlightPos();
+	@Accessor("filter") public abstract Predicate<String> getFilter();
+	
 	private final boolean isActiveB() { return ((EditBox)(Object)this).isActive(); }
 	// --------------------------------------------------
 	@Inject(at = @At("HEAD"), method = "keyPressed", cancellable = true)
@@ -76,6 +85,40 @@ public abstract class EditBoxMixin
 			else redo(true);
 			callback.setReturnValue(true); callback.cancel(); return;
 		}
+		// ------------------------- text manipulations
+		if(!UIInputUndoClient.noAltShift()) return;
+		
+		if(UIInputUndoClient.KeyManipReverseText.matches(keyCode, scanCode))
+		{
+			uiinputundo_replaceSelection(in -> TextManipUtils.reverseText(in));
+			//setText(TextManipUtils.reverseText(getText()));
+			callback.setReturnValue(true); callback.cancel(); return;
+		}
+		else if(UIInputUndoClient.KeyManipReverseWords.matches(keyCode, scanCode))
+		{
+			uiinputundo_replaceSelection(in -> TextManipUtils.reverseWords(in));
+			//setText(TextManipUtils.reverseWords(getText()));
+			callback.setReturnValue(true); callback.cancel(); return;
+		}
+		else if(UIInputUndoClient.KeyManipAllUppercase.matches(keyCode, scanCode))
+		{
+			uiinputundo_replaceSelection(in -> in.toUpperCase());
+			//setText(getText().toUpperCase());
+			callback.setReturnValue(true); callback.cancel(); return;
+		}
+		else if(UIInputUndoClient.KeyManipAllLowercase.matches(keyCode, scanCode))
+		{
+			uiinputundo_replaceSelection(in -> in.toLowerCase());
+			//setText(getText().toLowerCase());
+			callback.setReturnValue(true); callback.cancel(); return;
+		}
+		else if(UIInputUndoClient.KeyManipCapitalWords.matches(keyCode, scanCode))
+		{
+			uiinputundo_replaceSelection(in -> TextManipUtils.capitalizeAllWords(in));
+			//setText(TextManipUtils.capitalizeAllWords(getText()));
+			callback.setReturnValue(true); callback.cancel(); return;
+		}
+		// -------------------------
 	}
 	// ==================================================
 	public void registerUndo(HistoryEntry entry)
@@ -178,11 +221,11 @@ public abstract class EditBoxMixin
 		catch(Exception e) { return false; }
 	}
 	// --------------------------------------------------
-	/*private void uiinputundo_replaceSelection(Function<String, String> func)
+	private void uiinputundo_replaceSelection(Function<String, String> func)
 	{
 		//get selection indexes and selection text
-		int i = Math.min(getSelectionStart(), getSelectionEnd());
-	    int j = Math.max(getSelectionStart(), getSelectionEnd());
+		int i = Math.min(getCursorPosition(), getHighlightPos());
+	    int j = Math.max(getCursorPosition(), getHighlightPos());
 	    String selectedText = null;
 	    
 	    try { selectedText = getValue().substring(i, j); }
@@ -192,31 +235,29 @@ public abstract class EditBoxMixin
 	    if(!StringUtils.isEmpty(selectedText))
 	    {
 	    	//if there is text selected, only apply to selected text
-	    	int i1 = getSelectionStart();
-	    	int j1 = getSelectionEnd();
-	    	int cursor = getCursorPosition();
+	    	int i1 = getCursorPosition();
+	    	int j1 = getHighlightPos();
 	    	
 	    	selectedText = func.apply(selectedText);
 	    	String output = new StringBuilder(getValue()).replace(i, j, selectedText).toString();
 	    	
-	    	if(!getTextPredicate().test(output)) return;
+	    	if(!getFilter().test(output)) return;
 	    	setValue(output);
 	    	
-	    	setCursorPosition(cursor);
-	    	setSelectionStart(i1);
-	    	setSelectionEnd(j1);
+	    	setCursorPosition(i1);
+	    	setHighlightPos(j1);
 	    }
 	    else
 	    {
 	    	//if there is no selected text, apply to the whole text
-	    	int cursor = getCursorPosWithOffset(0);
+	    	int cursor = getCursorPosition();
 	    	
 	    	String output = func.apply(getValue());
-	    	if(!getTextPredicate().test(output)) return;
+	    	if(!getFilter().test(output)) return;
 	    	setValue(output);
 	    	
 	    	setCursorPosition(cursor);
 	    }
-	}*/
+	}
 	// ==================================================
 }
