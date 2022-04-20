@@ -1,8 +1,5 @@
 package thecsdev.uiinputundo.client;
 
-/**
- * Not implemented yet. Planning to implement it.
- */
 public class HistoryEntry
 {
 	public final String text;

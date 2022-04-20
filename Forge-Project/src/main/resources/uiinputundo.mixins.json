@@ -1,0 +1,13 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "thecsdev.uiinputundo.mixin",
+	"refmap": "mixins.uiinputundo.refmap.json",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [],
+	"client": ["EditBoxMixin"],
+	"injectors":
+	{
+		"defaultRequire": 1
+	}
+}
