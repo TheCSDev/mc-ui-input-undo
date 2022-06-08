@@ -1,0 +1,12 @@
+{
+	"thecsdev.uiinputundo": "UI Input Undo",
+	"thecsdev.uiinputundo.undo_key": "Undo text (CTRL + _)",
+	"thecsdev.uiinputundo.redo_key": "Redo text (CTRL + _)",
+
+	"thecsdev.uiinputundo.txtmanip": "UI Input Undo - Text manipulation",
+	"thecsdev.uiinputundo.txtmanip.reversetext": "Reverse text (CTRL + _)",
+	"thecsdev.uiinputundo.txtmanip.reversewords": "Reverse words (CTRL + _)",
+	"thecsdev.uiinputundo.txtmanip.alluppercase": "ALL UPPERCASE (CTRL + _)",
+	"thecsdev.uiinputundo.txtmanip.alllowercase": "all lowercase (CTRL + _)",
+	"thecsdev.uiinputundo.txtmanip.capitalizeallwords": "Capitalize All Words (CTRL + _)"
+}
